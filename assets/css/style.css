@@ -19,7 +19,7 @@ main {
 
 /* Game */
 #game {
-  width: 400px;
+  width: 500px;
   height: 500px;
   border: 1px solid black;
   margin: auto;
@@ -62,8 +62,14 @@ main {
 #mac {
   width: 20px;
   height: 20px;
-  background-color: red;
+  /* background-color: red; */
   position: absolute;
   top: 100px;
   border-radius: 50%;
+}
+
+/* Head image */
+#mac img {
+  max-width: 100%;
+  max-height: 100%;
 }
