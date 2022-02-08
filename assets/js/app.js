@@ -1,54 +1,62 @@
 // Main element
 const main = document.querySelector("main");
 
-// Window Height and Width
-// const windowWidth = document.documentElement.clientWidth;
-const windowWidth = "500px";
-// const windowHeight = document.documentElement.clientHeight;
-const windowHeight = "500px";
-console.log(windowWidth);
-console.log(windowHeight);
-
 // Create game div
 const gameDiv = document.createElement("div");
 gameDiv.setAttribute("id", "game");
-gameDiv.style.width = windowWidth;
-gameDiv.style.height = windowHeight;
-gameDiv.style.border = "1px solid blue";
-gameDiv.style.margin = "auto";
-gameDiv.style.overflow = "hidden;";
+gameDiv.style.cssText = `width: 100vw;
+height: 100vh;
+border: 1px solid blue;
+margin:auto;
+overflow: hidden`;
 main.append(gameDiv);
+
+// Window Height and Width
+const windowWidth = document.documentElement.clientWidth;
+const windowHeight = document.documentElement.clientHeight;
+console.log(windowWidth);
+console.log(windowHeight);
 
 // Create Block
 const block = document.createElement("div");
 block.setAttribute("id", "block");
-block.style.width = "50px";
-block.style.height = windowHeight;
-block.style.backgroundColor = "green";
-block.style.position = "relative";
-block.style.left = "400px";
-block.style.animation = "block 2s infinite linear";
+block.style.cssText = `width:50px;
+height:100%;
+background-color:green;
+position:relative;
+left:${windowWidth}px;
+`;
+let blockMoving = [{ left: windowWidth + "px" }, { left: "-50px" }];
+const aliceTiming = {
+  duration: 4000,
+  iterations: Infinity,
+};
+block.animate(blockMoving, aliceTiming);
 gameDiv.append(block);
 
 // Create Hole
 const hole = document.createElement("div");
 hole.setAttribute("id", "hole");
 hole.style.cssText = `width: 50px;
-   height: 150px;
+   height: 300px;
    background-color: gainsboro;
    position: relative;
-   left: 400px;
+   left: ${windowWidth}px;
    top: -500px;
    animation: block 2s infinite linear;`;
+hole.animate(blockMoving, aliceTiming);
 gameDiv.append(hole);
+
+// Mac start height
+const macStart = windowHeight * 0.75;
 
 // Create Mac
 const mac = document.createElement("div");
 mac.setAttribute("id", "mac");
-mac.style.cssText = `width: 20px;
-height: 20px;
+mac.style.cssText = `width: 50px;
+height: 50px;
 position: absolute;
-top: 100px;
+top: ${macStart}px;
 border-radius: 50%;`;
 gameDiv.append(mac);
 
