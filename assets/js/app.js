@@ -1,14 +1,69 @@
-// Get elements
+// Main element
 const main = document.querySelector("main");
-const block = document.querySelector("#block");
-const hole = document.querySelector("#hole");
-const mac = document.querySelector("#mac");
+
+// Window Height and Width
+// const windowWidth = document.documentElement.clientWidth;
+const windowWidth = "500px";
+// const windowHeight = document.documentElement.clientHeight;
+const windowHeight = "500px";
+console.log(windowWidth);
+console.log(windowHeight);
+
+// Create game div
+const gameDiv = document.createElement("div");
+gameDiv.setAttribute("id", "game");
+gameDiv.style.width = windowWidth;
+gameDiv.style.height = windowHeight;
+gameDiv.style.border = "1px solid blue";
+gameDiv.style.margin = "auto";
+gameDiv.style.overflow = "hidden;";
+main.append(gameDiv);
+
+// Create Block
+const block = document.createElement("div");
+block.setAttribute("id", "block");
+block.style.width = "50px";
+block.style.height = windowHeight;
+block.style.backgroundColor = "green";
+block.style.position = "relative";
+block.style.left = "400px";
+block.style.animation = "block 2s infinite linear";
+gameDiv.append(block);
+
+// Create Hole
+const hole = document.createElement("div");
+hole.setAttribute("id", "hole");
+hole.style.cssText = `width: 50px;
+   height: 150px;
+   background-color: gainsboro;
+   position: relative;
+   left: 400px;
+   top: -500px;
+   animation: block 2s infinite linear;`;
+gameDiv.append(hole);
+
+// Create Mac
+const mac = document.createElement("div");
+mac.setAttribute("id", "mac");
+mac.style.cssText = `width: 20px;
+height: 20px;
+position: absolute;
+top: 100px;
+border-radius: 50%;`;
+gameDiv.append(mac);
+
+// Create Mac Image
+const macImg = document.createElement("img");
+macImg.src = "./assets/images/head.png";
+macImg.style.width = "100%";
+macImg.style.height = "100%";
+mac.append(macImg);
 
 // Variables
 let jumping = 0;
 let counter = 0;
 
-// Event listner that runs every time the animation runs
+// Event listener that runs every time the animation runs
 hole.addEventListener("animationiteration", () => {
   // Random number between -150 and 550
   const random = -(Math.random() * 400 + 150);
@@ -21,7 +76,7 @@ setInterval(function () {
   let macTop = parseInt(window.getComputedStyle(mac).getPropertyValue("top"));
   if (jumping === 0) {
     mac.style.top = `${macTop + 3}px`;
-    console.log(macTop);
+    // console.log(macTop);
   }
   //   Variables for the postion of the gap
   const blockLeft = parseInt(
@@ -38,7 +93,7 @@ setInterval(function () {
       blockLeft > -50 &&
       (cTop < holeTop || cTop > holeTop + 130))
   ) {
-    alert(`Game Over! Score: ${counter - 1}`);
+    // alert(`Game Over! Score: ${counter - 1}`);
     mac.style.top = `${100}px`;
     block.style.left = `${500}px`;
     counter = 0;
